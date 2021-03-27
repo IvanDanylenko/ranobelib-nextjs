@@ -1,0 +1,347 @@
+.catalog {
+  max-width: 830px;
+  padding: 10px 14px;
+  &__head {
+    margin-bottom: 14px;
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    &-bottom {
+    }
+  }
+
+  &__title {
+    font-size: 21px;
+    margin: 0;
+  }
+
+  &__sort {
+    &-button {
+      font-weight: 400;
+      padding: 0 8px;
+      &:hover {
+        background-color: $background-darken;
+      }
+    }
+  }
+
+  &__search-input {
+    height: 36px;
+  }
+
+  // LIST
+  &-list {
+    margin: 0 -12px;
+    &__grid {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 4px 5px;
+    }
+
+    &__card-wrap {
+      width: 20%;
+      padding: 8px;
+    }
+  }
+
+  &-card-info {
+    max-width: 350px;
+    background-color: hsla(0, 0%, 6%, 0.97);
+    color: $white;
+    text-align: left;
+    position: relative;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 20px;
+    &__header {
+      margin-bottom: 10px;
+      position: relative;
+      h3 {
+        font-weight: 500;
+        font-size: 15px;
+        margin: 0;
+      }
+      h5 {
+        font-weight: 400;
+        font-size: 13px;
+        color: $text-muted;
+      }
+    }
+
+    &__pg {
+      float: right;
+      width: 26px;
+      height: 26px;
+      padding: 5px 0;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: $red;
+    }
+
+    &__description {
+      line-height: 18px;
+      text-align: left;
+    }
+
+    &__rows {
+      margin: 15px 0;
+    }
+
+    &__row {
+      margin-bottom: 5px;
+      strong {
+        font-weight: 500;
+        padding-right: 5px;
+      }
+      span {
+        margin-right: 3px;
+        color: #74c0c8;
+        &:after {
+          content: ",";
+        }
+        &:last-child:after {
+          content: "";
+        }
+      }
+    }
+
+    &__rating {
+      border-top: 2px solid #212a30;
+      border-bottom: 2px solid #212a30;
+      padding: 10px 0;
+
+      &-count {
+        font-weight: 700;
+        display: inline-block;
+        margin-left: 8px;
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+
+    &__stars .fa {
+      color: $orange-darken;
+      font-size: 15px;
+      margin-right: 3px;
+      cursor: pointer;
+    }
+  }
+}
+
+.search-filter {
+  width: 300px;
+  height: auto;
+  position: fixed;
+  z-index: 300;
+  top: 73px;
+  bottom: 14px;
+  right: 10px;
+  overflow: hidden;
+  &__layout {
+    background-color: $white;
+    height: 100%;
+    &_hidden {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      .is-visible {
+        display: block;
+      }
+      .search-filter__group {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .search-filter__wrap {
+        max-height: calc(100% - 128px);
+      }
+    }
+  }
+  &__wrap {
+    overflow-y: auto;
+    max-height: calc(100% - 44px);
+  }
+  &__filters {
+    padding: 7px;
+  }
+  &-submenu {
+    padding: 8px 7px;
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 3px;
+    &:hover {
+      background-color: $background-highlight;
+    }
+    &__name {
+      font-weight: 600;
+    }
+    &__right {
+    }
+    &__selected {
+      font-size: 12px;
+      padding: 0 10px;
+      font-weight: 400;
+      color: $text-secondary;
+    }
+  }
+  &__group {
+    padding: 6px 7px;
+  }
+  &__title {
+    font-weight: 600;
+    &_submenu {
+      padding: 10px 14px;
+      color: $text-muted;
+      background-color: $background-highlight;
+    }
+    .text-muted {
+      font-weight: 400;
+      font-size: 12px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
+  &__content {
+    padding: 3px 0;
+  }
+  &__input-group {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    span {
+      margin: 0 10px;
+    }
+  }
+  &__input {
+  }
+
+  &__checkbox-list {
+    &_flex {
+      display: flex;
+      flex-wrap: wrap;
+      .search-filter__checkbox {
+        min-width: 50%;
+      }
+    }
+    &_inline {
+      display: flex;
+      flex-wrap: wrap;
+      .search-filter__checkbox {
+        min-width: 25%;
+      }
+    }
+    // &_nowrap {
+    //     flex-wrap: nowrap;
+    //     flex-direction: column;
+    // }
+    // &_column .search-filter__checkbox {
+    //     min-width: 50%;
+    // }
+    // &_inline .search-filter__checkbox {
+    //     min-width: 25%;
+    // }
+  }
+
+  &__checkbox {
+    padding: 4px 10px 4px 0;
+    min-width: 120px;
+    .checkbox__text {
+      flex-grow: 1;
+    }
+  }
+
+  &__with-exclude .checkbox__input {
+    &[value="1"] {
+      ~ .checkbox__indicator {
+        background-color: $green;
+        border-color: $green;
+        &:before {
+          opacity: 1;
+        }
+      }
+    }
+    &[value="2"] {
+      ~ .checkbox__indicator {
+        background-color: $red;
+        border-color: $red;
+        &:before {
+          content: "\f00d";
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__buttons {
+    padding: 6px 14px;
+    display: flex;
+    justify-content: space-between;
+    .button {
+      flex-grow: 1;
+      + .button {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    padding: 0 14px;
+    border-bottom: 1px solid $border-base;
+    &-title {
+      padding: 7px 0;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  }
+  &__reset {
+    font-size: 13px;
+    cursor: pointer;
+  }
+  &-input {
+    position: relative;
+    &__field {
+      border: 0;
+      border-radius: 0;
+      height: 40px;
+      padding: 6px 14px;
+      border-bottom: 1px solid $input-border;
+    }
+    &__clear {
+      cursor: pointer;
+      position: absolute;
+      z-index: 40;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 24px;
+      width: 24px;
+      padding: 4px;
+      color: $text-secondary;
+      border-radius: 3px;
+    }
+  }
+  &__counter {
+    font-size: 12px;
+    float: right;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+}
