@@ -140,17 +140,20 @@ export default function Header() {
 
         <div className="header__item header-right-menu">
           {/* UNREGISTERED USERS TEMPLATE */}
-          <button className="hidden button header__sign header__sign-in">
-            Вход
-          </button>
-          <a href="#" className="hidden button header__sign header__sign-up">
-            Регистрация
-          </a>
-          <div className="hidden header-right-menu__item drowdown header-button">
-            <div className="header-button__icon tooltip">
-              <i className="fa fa-moon-o" />
+          <div className="hidden">
+            <button className="button header__sign header__sign-in">
+              Вход
+            </button>
+            <a href="#" className="button header__sign header__sign-up">
+              Регистрация
+            </a>
+            <div className="header-right-menu__item drowdown header-button">
+              <div className="header-button__icon tooltip">
+                <i className="fa fa-moon-o" />
+              </div>
             </div>
           </div>
+
           {/* USERS WITH REGISTRATION TEMPLATE*/}
           <div className="header-right-menu__item drowdown header-button">
             <Tippy

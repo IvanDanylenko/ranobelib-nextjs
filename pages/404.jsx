@@ -1,16 +1,10 @@
-import { useEffect } from "react"
 import Head from "next/head"
-import { useRouter } from "next/router"
+import TemporaryNavigation from "@/components/TemporaryNavigation"
 
 export default function Custom404() {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.replace("/404", undefined, { shallow: true })
-  }, [])
-
   return (
     <>
+      <TemporaryNavigation />
       <Head>
         <link
           rel="stylesheet"

@@ -22,7 +22,6 @@ html {
 }
 
 body {
-  overflow-y: hidden;
   margin: 0;
   background-color: $gray;
   color: $text-primary;
@@ -503,6 +502,19 @@ a {
   background-color: $primary;
   width: 100vw;
   height: 56px;
+  &_reader {
+    height: 48px;
+    will-change: opacity, visibility;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    &-pinned {
+      opacity: 1;
+      visibility: visible;
+    }
+    &-unpinned {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 
   &__inner {
     display: flex;

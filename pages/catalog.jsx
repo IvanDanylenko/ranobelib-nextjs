@@ -1,8 +1,8 @@
-import React from "react"
+import Layout from "@/components/Layout"
 
 export default function Catalog() {
   return (
-    <div>
+    <Layout>
       <div className="container container_offset container_responsive">
         <div className="page__wrapper page__wrapper_left paper catalog">
           <div className="catalog__head">
@@ -659,6 +659,6 @@ export default function Catalog() {
           <div className="catalog-card-info__rating-count">4.85</div>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
