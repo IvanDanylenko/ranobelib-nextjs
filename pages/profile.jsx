@@ -1,6 +1,13 @@
+import { connect } from "react-redux"
 import Layout from "@/components/Layout"
+import Custom404 from "@/pages/404"
 
-export default function ProfilePage() {
+function ProfilePage(props) {
+  const { isAuthenticated } = props.user
+
+  if (!isAuthenticated) {
+    return <Custom404 />
+  }
   return (
     <Layout>
       <div className="profile container container_responsive">
@@ -200,3 +207,9 @@ export default function ProfilePage() {
     </Layout>
   )
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
+
+export default connect(mapStateToProps)(ProfilePage)

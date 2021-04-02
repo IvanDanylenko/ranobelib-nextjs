@@ -255,14 +255,22 @@ a {
   }
 }
 
-.text-muted {
-  color: $text-muted;
-}
+.text {
+  &-muted {
+    color: $text-muted;
+  }
+  &-danger {
+    color: $red !important;
+  }
+  &-right {
+    text-align: right;
+  }
 
-.text-truncate {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  &-truncate {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }
 
 .line-clamp {
@@ -329,9 +337,45 @@ a {
 }
 
 .form {
+  .button:focus {
+    outline: 1px auto #000;
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid $border-base;
+  }
   &__field {
     position: relative;
     margin-bottom: 15px;
+    &-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      height: 32px;
+      width: 32px;
+      text-align: center;
+      line-height: 32px;
+      color: $text-secondary;
+      pointer-events: none;
+    }
+  }
+  &__subtitle {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: $text-secondary;
+    text-align: center;
+  }
+  &__description {
+    margin-bottom: 5px;
+    color: $text-secondary;
+    font-size: 13px;
+  }
+  &__input-wrap {
+    position: relative;
   }
   &__input,
   &__textarea {
@@ -357,6 +401,9 @@ a {
       padding: 2px 8px;
       height: 28px;
       font-size: 13px;
+    }
+    &_icon {
+      padding-left: 32px;
     }
   }
   &__textarea {
@@ -864,7 +911,9 @@ a {
   margin: 0;
   min-width: 160px;
   border: none;
+  max-height: calc(100vh - 70px);
   border-radius: 4px;
+  overflow-y: auto;
   &__item {
     position: relative;
     display: block;
@@ -901,5 +950,72 @@ a {
     height: 1px;
     margin: 8px 0;
     background-color: $border-base;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px 0;
+  overflow-y: auto;
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    outline: none;
+  }
+  &__content {
+    position: relative;
+    background-color: $white;
+    max-width: 92vw;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    &[data-size="small"] {
+      width: 400px;
+    }
+  }
+  &__header {
+    position: relative;
+    padding: 14px 20px 0;
+  }
+  &__title {
+    color: $text-primary;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    top: 11px;
+    right: 12px;
+    height: 24px;
+    width: 24px;
+    padding: 6px;
+    color: $text-secondary;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
+  }
+  &__body {
+    padding: 20px;
   }
 }

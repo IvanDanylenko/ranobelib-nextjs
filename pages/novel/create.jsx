@@ -66,7 +66,7 @@ export default function NovelCreate() {
             </div>
           </div>
           {/* form */}
-          <form>
+          <form className="form">
             <input type="hidden" name="cover" />
             <input type="hidden" name="background" />
             <div className="media-edit-form">

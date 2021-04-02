@@ -1,21 +1,135 @@
-import { useRef } from "react"
+import { useState } from "react"
+import { connect } from "react-redux"
+import { signin, signout } from "@/redux/store"
 import Image from "next/image"
 import Link from "next/link"
-import Tippy from "@tippyjs/react"
+import TippyDropdown from "@/components/TippyDropdown"
+import Login from "@/components/Login"
+import Modal from "react-modal"
+Modal.setAppElement("#__next")
 
-export default function Header() {
-  const catalogDropdownRef = useRef()
-  const authorDropdownRef = useRef()
+const Header = (props) => {
+  const { isAuthenticated } = props.user
 
-  const handleCatalogDropdownClick = () => {
-    catalogDropdownRef.current._tippy.hide()
-  }
-  const handleAuthorDropdownClick = () => {
-    authorDropdownRef.current._tippy.hide()
-  }
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const closeModal = () => setModalIsOpen(false)
+
+  const catalogDropdownContent = [
+    [
+      {
+        title: "Японской",
+      },
+      {
+        title: "Корейской",
+      },
+      {
+        title: "Китайской",
+      },
+      {
+        title: "Английской",
+      },
+      {
+        title: "Авторской",
+      },
+      {
+        title: "Фанфиков",
+      },
+    ],
+    [
+      {
+        title: "Весь",
+      },
+      {
+        title: "Случайный тайтл",
+      },
+    ],
+  ]
+  const addDropdownContent = [
+    [
+      {
+        href: "/novel/create",
+        icon: "fa-plus",
+        title: "Добавить мангу",
+      },
+      {
+        icon: "fa-users",
+        title: "Добавить команду",
+      },
+      {
+        icon: "fa-book",
+        title: "Добавить автора",
+      },
+    ],
+    [
+      {
+        icon: "fa-list-alt",
+        title: "Мои добавления",
+        label: "1",
+      },
+    ],
+  ]
+  const userMenuDropdownContent = [
+    [
+      {
+        href: "/profile",
+        icon: "fa-user",
+        title: "Профиль пользователя",
+      },
+      {
+        icon: "fa-bookmark",
+        title: "Мои закладки",
+      },
+      {
+        icon: "fa-bell",
+        title: "Уведомления",
+      },
+      {
+        icon: "fa-comment",
+        title: "Мои комментарии",
+      },
+      {
+        icon: "fa-envelope",
+        title: "Личные сообщения",
+      },
+      {
+        icon: "fa-users",
+        title: "Список друзей",
+      },
+      {
+        icon: "fa-ban",
+        title: "История банов",
+      },
+      {
+        icon: "fa-user-times",
+        title: "Игнор-лист",
+      },
+    ],
+    [
+      {
+        icon: "fa-cog",
+        title: "Настройки",
+      },
+      {
+        icon: "fa-sign-out",
+        title: "Выход",
+        addClass: "text-danger",
+        action: props.signout,
+      },
+    ],
+  ]
 
   return (
     <header className="header">
+      <Modal
+        isOpen={modalIsOpen}
+        closeTimeoutMS={150}
+        onRequestClose={closeModal}
+        overlayClassName="modal"
+        className="modal__inner"
+      >
+        <Login closeModal={closeModal} />
+      </Modal>
       <div className="header__inner">
         <div className="header__item header__left">
           <Link href="/">
@@ -32,77 +146,9 @@ export default function Header() {
         </div>
         <nav className="header__item header__menu">
           <div className="header-menu">
-            <Tippy
+            <TippyDropdown
               placement="bottom-start"
-              arrow={false}
-              theme="light"
-              trigger="click"
-              offset={[0, 7]}
-              duration="200"
-              animation="shift-toward-subtle"
-              interactive
-              ref={catalogDropdownRef}
-              content={
-                <div className="menu">
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Японской
-                  </a>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Корейской
-                  </a>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Китайской
-                  </a>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Английской
-                  </a>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Авторской
-                  </a>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Фанфиков
-                  </a>
-                  <div className="menu__divider"></div>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Весь
-                  </a>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleCatalogDropdownClick}
-                  >
-                    Случайный тайтл
-                  </a>
-                </div>
-              }
+              content={catalogDropdownContent}
             >
               <div className="header-menu__item dropdown">
                 <span>
@@ -111,7 +157,7 @@ export default function Header() {
                   <i className="fa fa-caret-down" />
                 </span>
               </div>
-            </Tippy>
+            </TippyDropdown>
             <div className="header-menu__item">
               <span>
                 <i className="fa fa-search" />
@@ -140,99 +186,79 @@ export default function Header() {
 
         <div className="header__item header-right-menu">
           {/* UNREGISTERED USERS TEMPLATE */}
-          <div className="hidden">
-            <button className="button header__sign header__sign-in">
-              Вход
-            </button>
-            <a href="#" className="button header__sign header__sign-up">
-              Регистрация
-            </a>
-            <div className="header-right-menu__item drowdown header-button">
-              <div className="header-button__icon tooltip">
-                <i className="fa fa-moon-o" />
+          {!isAuthenticated && (
+            <>
+              <button
+                className="button header__sign header__sign-in"
+                onClick={() => setModalIsOpen(true)}
+              >
+                Вход
+              </button>
+              <a href="#" className="button header__sign header__sign-up">
+                Регистрация
+              </a>
+              <div className="header-right-menu__item drowdown header-button">
+                <div className="header-button__icon tooltip">
+                  <i className="fa fa-moon-o" />
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
 
           {/* USERS WITH REGISTRATION TEMPLATE*/}
-          <div className="header-right-menu__item drowdown header-button">
-            <Tippy
-              placement="bottom-end"
-              arrow={false}
-              theme="light"
-              trigger="click"
-              hideOnClick={true}
-              offset={[0, 7]}
-              duration="200"
-              animation="shift-toward-subtle"
-              interactive
-              ref={authorDropdownRef}
-              content={
-                <div className="menu">
-                  <Link href="/novel/create">
-                    <a
-                      className="menu__item"
-                      onClick={handleAuthorDropdownClick}
-                    >
-                      <i className="fa fa-plus fa-fw"></i>
-                      Добавить мангу
-                    </a>
-                  </Link>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleAuthorDropdownClick}
-                  >
-                    <i className="fa fa-users fa-fw"></i>
-                    Добавить команду
-                  </a>
-                  <a
-                    onClick={handleAuthorDropdownClick}
-                    href="#"
-                    className="menu__item"
-                  >
-                    <i className="fa fa-book fa-fw"></i>
-                    Добавить автора
-                  </a>
-                  <div className="menu__divider"></div>
-                  <a
-                    href="#"
-                    className="menu__item"
-                    onClick={handleAuthorDropdownClick}
-                  >
-                    <i className="fa fa-list-alt fa-fw"></i>
-                    Мои добавления
-                    <span className="menu__label">0</span>
-                  </a>
-                </div>
-              }
-            >
-              <div className="header-button__icon">
-                <i className="fa fa-pencil" />
+          {isAuthenticated && (
+            <>
+              <div className="header-right-menu__item drowdown header-button">
+                <TippyDropdown
+                  placement="bottom-end"
+                  content={addDropdownContent}
+                >
+                  <div className="header-button__icon">
+                    <i className="fa fa-pencil" />
+                  </div>
+                </TippyDropdown>
               </div>
-            </Tippy>
-          </div>
-          <div className="header-right-menu__item drowdown header-button">
-            <div className="header-button__icon tooltip">
-              <i className="fa fa-bell" />
-            </div>
-          </div>
-          <div className="header-right-menu__item drowdown header-button">
-            <div className="header-button__icon tooltip">
-              <i className="fa fa-bookmark-o" />
-            </div>
-          </div>
-          <div className="header-right-menu__item drowdown">
-            <Image
-              className="header-right-menu__avatar"
-              src="/images/user-placeholder.png"
-              alt="User image"
-              width={36}
-              height={36}
-            />
-          </div>
+              <div className="header-right-menu__item drowdown header-button">
+                <div className="header-button__icon tooltip">
+                  <i className="fa fa-bell" />
+                </div>
+              </div>
+              <div className="header-right-menu__item drowdown header-button">
+                <div className="header-button__icon tooltip">
+                  <i className="fa fa-bookmark-o" />
+                </div>
+              </div>
+              <div className="header-right-menu__item drowdown">
+                <TippyDropdown
+                  placement="bottom-end"
+                  content={userMenuDropdownContent}
+                >
+                  <div>
+                    <Image
+                      className="header-right-menu__avatar"
+                      src="/images/user-placeholder.png"
+                      alt="User image"
+                      width={36}
+                      height={36}
+                    />
+                  </div>
+                </TippyDropdown>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </header>
   )
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
+
+const mapDispatchToProps = {
+  signin,
+  signout,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

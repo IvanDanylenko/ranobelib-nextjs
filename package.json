@@ -10,12 +10,19 @@
   "dependencies": {
     "@prisma/client": "^2.20.1",
     "@tippyjs/react": "^4.2.5",
+    "axios": "^0.21.1",
     "next": "^10.0.0",
+    "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-redux": "^7.2.3"
+    "react-modal": "^3.12.1",
+    "react-redux": "^7.2.3",
+    "react-toastify": "^7.0.3",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "redux-devtools-extension": "^2.13.9",
     "prisma": "^2.20.1",
     "sass": "^1.32.8"
   }

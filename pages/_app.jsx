@@ -1,16 +1,24 @@
 import "@/styles/index.scss"
+import React from "react"
 import Head from "next/head"
+import { wrapper } from "@/redux/store"
+import { ToastContainer, Slide } from "react-toastify"
 
-export const siteTitle = "Next.js Ranobelib"
+const MyApp = ({ Component, pageProps }) => (
+  <>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Next.js Ranobelib</title>
+    </Head>
+    <Component {...pageProps} />
+    <ToastContainer
+      position="bottom-center"
+      autoClose={4000}
+      hideProgressBar
+      limit={1}
+      transition={Slide}
+    />
+  </>
+)
 
-export default function App({ Component, pageProps }) {
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{siteTitle}</title>
-      </Head>
-      <Component {...pageProps} />
-    </>
-  )
-}
+export default wrapper.withRedux(MyApp)
