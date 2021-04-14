@@ -3,12 +3,6 @@ import Link from "next/link"
 export default function TemporaryNavigation() {
   return (
     <div id="page-navigation" className="paper">
-      <style
-        dangerouslySetInnerHTML={{
-          __html:
-            "\n    #page-navigation {\n        position: fixed;\n        bottom: 10px;\n        left: 50%;\n        transform: translateX(-50%);\n        z-index: 1000;\n        padding: 8px 20px;\n        /* border: 1px solid gray; */\n        display: flex;\n        box-shadow: 0 0 1px rgba(0, 0, 0, .6)\n    }\n\n    #page-navigation a {\n        white-space: nowrap;\n        position: relative;\n    }\n\n    #page-navigation a:not(:last-child) {\n        margin-right: 15px;\n    }\n\n    #page-navigation a:not(:last-child):after {\n        content: '';\n        display: block;\n        position: absolute;\n        right: -10px;\n        top: 50%;\n        width: 4px;\n        height: 1px;\n        border-radius: 3px;\n        background-color: #212529;\n    }\n",
-        }}
-      />
       <Link href="/">
         <a className="link-default">Главная</a>
       </Link>
@@ -34,6 +28,36 @@ export default function TemporaryNavigation() {
       <Link href="/test">
         <a className="link-default">Тестовая</a>
       </Link>
+      <style jsx>{`
+        #page-navigation {
+          position: fixed;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1000;
+          padding: 8px 20px;
+          display: flex;box-shadow: 0 0 1px rgba(0, 0, 0, .6);
+          border: 1px solid black;
+        }
+        #page-navigation a {
+          white-space: nowrap;
+          position: relative;
+        }
+        #page-navigation a:not(:last-child) {
+          margin-right: 15px;
+        }
+        #page-navigation a:not(:last-child):after {
+          content: '';
+          display: block;
+          position: absolute;
+          right: -10px;
+          top: 50%;
+          width: 4px;
+          height: 1px;
+          border-radius: 3px;
+          background-color: #212529;
+        }
+      `}</style>
     </div>
   )
 }

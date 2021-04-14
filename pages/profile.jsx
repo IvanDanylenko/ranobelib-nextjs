@@ -6,7 +6,7 @@ function ProfilePage(props) {
   const { isAuthenticated } = props.user
 
   if (!isAuthenticated) {
-    return <Custom404 />
+    return <Custom404 text="Access denied" code="403"/>
   }
   return (
     <Layout>
