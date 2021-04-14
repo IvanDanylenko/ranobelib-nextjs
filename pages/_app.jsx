@@ -17,6 +17,7 @@ const MyApp = ({ Component, pageProps }) => (
       hideProgressBar
       limit={1}
       transition={Slide}
+      closeButton={false}
     />
   </>
 )

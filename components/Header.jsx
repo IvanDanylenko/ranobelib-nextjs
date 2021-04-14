@@ -1,19 +1,21 @@
-import { useState } from "react"
-import { connect } from "react-redux"
-import { signin, signout } from "@/redux/store"
-import Image from "next/image"
-import Link from "next/link"
-import TippyDropdown from "@/components/TippyDropdown"
-import Login from "@/components/Login"
-import Modal from "react-modal"
-Modal.setAppElement("#__next")
+import { useState } from "react";
+import { connect } from "react-redux";
+import { signin, signout } from "@/redux/store";
+import Image from "next/image";
+import Link from "next/link";
+import TippyDropdown from "@/components/TippyDropdown";
+import Login from "@/components/Login";
+import Register from "@/components/Register";
+import Modal from "@/lib/modal";
 
 const Header = (props) => {
-  const { isAuthenticated } = props.user
+  const { isAuthenticated } = props.user;
 
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+  const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
 
-  const closeModal = () => setModalIsOpen(false)
+  const closeLoginModal = () => setLoginModalIsOpen(false);
+  const closeRegisterModal = () => setRegisterModalIsOpen(false);
 
   const catalogDropdownContent = [
     [
@@ -44,7 +46,7 @@ const Header = (props) => {
         title: "Случайный тайтл",
       },
     ],
-  ]
+  ];
   const addDropdownContent = [
     [
       {
@@ -68,7 +70,7 @@ const Header = (props) => {
         label: "1",
       },
     ],
-  ]
+  ];
   const userMenuDropdownContent = [
     [
       {
@@ -117,19 +119,32 @@ const Header = (props) => {
         action: props.signout,
       },
     ],
-  ]
+  ];
 
   return (
     <header className="header">
-      <Modal
-        isOpen={modalIsOpen}
-        closeTimeoutMS={150}
-        onRequestClose={closeModal}
-        overlayClassName="modal"
-        className="modal__inner"
-      >
-        <Login closeModal={closeModal} />
-      </Modal>
+      {!isAuthenticated && (
+        <>
+          <Modal
+            isOpen={loginModalIsOpen}
+            closeTimeoutMS={150}
+            onRequestClose={closeLoginModal}
+            overlayClassName="modal"
+            className="modal__inner"
+          >
+            <Login closeModal={closeLoginModal} />
+          </Modal>
+          <Modal
+            isOpen={registerModalIsOpen}
+            closeTimeoutMS={150}
+            onRequestClose={closeRegisterModal}
+            overlayClassName="modal"
+            className="modal__inner"
+          >
+            <Register closeModal={closeRegisterModal} />
+          </Modal>
+        </>
+      )}
       <div className="header__inner">
         <div className="header__item header__left">
           <Link href="/">
@@ -190,13 +205,21 @@ const Header = (props) => {
             <>
               <button
                 className="button header__sign header__sign-in"
-                onClick={() => setModalIsOpen(true)}
+                onClick={() => setLoginModalIsOpen(true)}
               >
                 Вход
               </button>
-              <a href="#" className="button header__sign header__sign-up">
+              <button
+                className="button header__sign header__sign-up"
+                onClick={() => setRegisterModalIsOpen(true)}
+              >
                 Регистрация
-              </a>
+              </button>
+              {/* <Link href="/register">
+                <a className="button header__sign header__sign-up">
+                  Регистрация
+                </a>
+              </Link> */}
               <div className="header-right-menu__item drowdown header-button">
                 <div className="header-button__icon tooltip">
                   <i className="fa fa-moon-o" />
@@ -249,16 +272,16 @@ const Header = (props) => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   user: state.user,
-})
+});
 
 const mapDispatchToProps = {
   signin,
   signout,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

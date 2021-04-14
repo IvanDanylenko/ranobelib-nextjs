@@ -4,13 +4,14 @@ import { connect } from "react-redux"
 import { useState } from "react"
 import { signin, signout } from "@/redux/store"
 import { ToastContainer, toast, Slide } from "react-toastify"
+import ToastItem from "@/components/ToastItem"
 
 function Test(props) {
   // console.log("props", props)
   const notify = () => {
     console.log("Notify fired")
-    toast("WOw so easy", {
-      toastId: "toast",
+    toast.error(<ToastItem text="here is content" />, {
+      autoClose: true,
     })
   }
   return (
@@ -24,19 +25,6 @@ function Test(props) {
         <button className="button" onClick={notify}>
           Notify
         </button>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar
-          limit={1}
-          transition={Slide}
-          // newestOnTop
-          // closeOnClick={false}
-          // rtl={false}
-          // pauseOnFocusLoss
-          // draggable
-          // pauseOnHover
-        />
 
         {/* container end */}
         {/* WRITE CODE HERE */}

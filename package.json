@@ -22,8 +22,8 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.9",
     "prisma": "^2.20.1",
+    "redux-devtools-extension": "^2.13.9",
     "sass": "^1.32.8"
   }
 }

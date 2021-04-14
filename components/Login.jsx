@@ -1,12 +1,20 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
 import axios from "axios"
 import { connect } from "react-redux"
 import { signin } from "@/redux/store"
 import { toast } from "react-toastify"
+import ToastItem from "@/components/ToastItem"
 
 function Login({ closeModal, signin }) {
   const [email, setEmail] = useState("danylenko.ivan11@gmail.com")
   const [password, setPassword] = useState("121212")
+
+  const emailInput = useRef()
+
+  useEffect(() => {
+    emailInput.current.focus()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,17 +27,16 @@ function Login({ closeModal, signin }) {
     axios
       .post("/api/auth/login", data)
       .then((res) => {
-        if (res.data.ok) {
-          signin()
+        if (res.data) {
+          signin(res.data)
           closeModal()
-        } else {
-          toast("Неверный логин или пароль", {
-            toastId: "authError",
-          })
         }
       })
       .catch((error) => {
         console.error("Error", error)
+        toast.error(<ToastItem text="Неверный логин или пароль" />, {
+          toastId: "authError",
+        })
       })
   }
 
@@ -54,6 +61,7 @@ function Login({ closeModal, signin }) {
                 placeholder="Логин или email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                ref={emailInput}
               />
               <span className="form__field-icon">
                 <i className="fa fa-user"></i>
@@ -84,9 +92,9 @@ function Login({ closeModal, signin }) {
             <button type="submit" className="button button_primary button_md">
               Войти
             </button>
-            <a href="#" className="link-default">
-              Регистрация
-            </a>
+            <Link href="/register">
+              <a className="link-default">Регистрация</a>
+            </Link>
           </div>
           {/* Form content end */}
         </form>
