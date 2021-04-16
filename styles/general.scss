@@ -52,6 +52,14 @@ ol {
   display: none !important;
 }
 
+.d-flex {
+  display: flex !important;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
 .container {
   margin: 0 auto;
   padding: 0 15px;
@@ -78,7 +86,7 @@ ol {
 }
 
 .mr-10 {
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 
 .float-right {
@@ -118,6 +126,13 @@ a {
 
 .link-default {
   color: #212529;
+  background: none;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: $text-link;
+    text-decoration: underline;
+  }
 }
 
 .line-clamp {

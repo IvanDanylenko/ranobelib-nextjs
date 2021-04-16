@@ -17,6 +17,11 @@ const Header = (props) => {
   const closeLoginModal = () => setLoginModalIsOpen(false);
   const closeRegisterModal = () => setRegisterModalIsOpen(false);
 
+  const openRegisterModal = () => {
+    setLoginModalIsOpen(false)
+    setRegisterModalIsOpen(true)
+  }
+
   const catalogDropdownContent = [
     [
       {
@@ -132,7 +137,7 @@ const Header = (props) => {
             overlayClassName="modal"
             className="modal__inner"
           >
-            <Login closeModal={closeLoginModal} />
+            <Login closeModal={closeLoginModal} openRegisterModal={openRegisterModal} />
           </Modal>
           <Modal
             isOpen={registerModalIsOpen}

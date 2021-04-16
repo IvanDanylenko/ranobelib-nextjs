@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import axios from "axios"
 import { connect } from "react-redux"
+import axiosConfig from "@/lib/axiosConfig"
 import { signin } from "@/redux/store"
 import { toast } from "react-toastify"
 import ToastItem from "@/components/ToastItem"
+import Loader from "react-loader-spinner"
 
-function Login({ closeModal, signin }) {
+function Login({ signin, closeModal, openRegisterModal }) {
   const [email, setEmail] = useState("danylenko.ivan11@gmail.com")
   const [password, setPassword] = useState("121212")
+  const [loading, setLoading] = useState(false)
 
   const emailInput = useRef()
 
@@ -18,23 +20,30 @@ function Login({ closeModal, signin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
     const data = {
       email,
       password,
     }
 
-    axios
-      .post("/api/auth/login", data)
+    axiosConfig
+      .get(`/customer?q=${JSON.stringify(data)}`)
       .then((res) => {
-        if (res.data) {
-          signin(res.data)
+        if (res.data.length) {
+          signin(res.data[0])
           closeModal()
+        } else {
+          setLoading(false)
+          toast.error(<ToastItem text="Неверный логин или пароль" />, {
+            toastId: "authError",
+          })
         }
       })
       .catch((error) => {
+        setLoading(false)
         console.error("Error", error)
-        toast.error(<ToastItem text="Неверный логин или пароль" />, {
+        toast.error(<ToastItem text="Произошла ошибка входа" />, {
           toastId: "authError",
         })
       })
@@ -89,12 +98,25 @@ function Login({ closeModal, signin }) {
             </div>
           </div>
           <div className="form__footer">
-            <button type="submit" className="button button_primary button_md">
-              Войти
+            <div className="d-flex align-items-center">
+              <button
+                type="submit"
+                className="button button_primary button_md mr-10"
+              >
+                Войти
+              </button>
+              <Loader
+                type="ThreeDots"
+                color="#818181"
+                height={20}
+                width={20}
+                visible={loading}
+                className="d-flex align-items-center"
+              />
+            </div>
+            <button type="button" className="link-default" onClick={openRegisterModal}>
+              Регистрация
             </button>
-            <Link href="/register">
-              <a className="link-default">Регистрация</a>
-            </Link>
           </div>
           {/* Form content end */}
         </form>

@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef } from "react"
-import axios from "axios"
+import axiosConfig from "@/lib/axiosConfig"
 import { connect } from "react-redux"
 import { signin } from "@/redux/store"
 import { toast } from "react-toastify"
 import ToastItem from "@/components/ToastItem"
+import Loader from "react-loader-spinner"
 
 function Register({ closeModal, signin }) {
   const [name, setName] = useState("Ivan")
   const [email, setEmail] = useState("danylenko.ivan11@gmail.com")
   const [password, setPassword] = useState("121212")
   const [passwordRepeated, setPasswordRepeated] = useState("121212")
+  const [loading, setLoading] = useState(false)
 
   const nameInput = useRef()
 
@@ -19,6 +21,7 @@ function Register({ closeModal, signin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
     const data = {
       name,
@@ -26,19 +29,19 @@ function Register({ closeModal, signin }) {
       password,
     }
 
-    console.log("Data", data)
-
-    axios
-      .post("/api/auth/register", data)
+    axiosConfig
+      .post("/customer", data)
       .then((res) => {
-        if (res.data) {
-          console.log("Res data", res.data)
+        console.log(res)
+        if (res.status == 201) {
           signin(res.data)
+          setLoading(false)
           closeModal()
         }
       })
       .catch((error) => {
-        // console.error("Error", error)
+        console.error("Error", error)
+        setLoading(false)
         toast.error(
           <ToastItem text="Пользователь с таким email уже зарегистрирован" />,
           {
@@ -125,9 +128,22 @@ function Register({ closeModal, signin }) {
               </div>
             </div>
             <div className="form__footer">
-              <button type="submit" className="button button_primary button_md">
-                Зарегистрироваться
-              </button>
+              <div className="d-flex align-items-center">
+                <button
+                  type="submit"
+                  className="button button_primary button_md mr-10"
+                >
+                  Зарегистрироваться
+                </button>
+                <Loader
+                  type="ThreeDots"
+                  color="#818181"
+                  height={20}
+                  width={20}
+                  visible={loading}
+                  className="d-flex align-items-center"
+                />
+              </div>
             </div>
             {/* Form content end */}
           </form>

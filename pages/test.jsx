@@ -1,19 +1,24 @@
-import TemporaryNavigation from "@/components/TemporaryNavigation"
-import Layout from "@/components/Layout"
-import { connect } from "react-redux"
-import { useState } from "react"
-import { signin, signout } from "@/redux/store"
-import { ToastContainer, toast, Slide } from "react-toastify"
-import ToastItem from "@/components/ToastItem"
+import TemporaryNavigation from "@/components/TemporaryNavigation";
+import Layout from "@/components/Layout";
+import { connect } from "react-redux";
+import { useState } from "react";
+import { signin, signout } from "@/redux/store";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import ToastItem from "@/components/ToastItem";
+import axiosConfig from "@/lib/axiosConfig";
 
 function Test(props) {
   // console.log("props", props)
-  const notify = () => {
-    console.log("Notify fired")
-    toast.error(<ToastItem text="here is content" />, {
-      autoClose: true,
-    })
-  }
+  const doSomething = () => {
+     axiosConfig
+      .get("/customer")
+      .then(({data}) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <Layout>
       <TemporaryNavigation />
@@ -22,7 +27,7 @@ function Test(props) {
         {/* WRITE CODE HERE */}
         {/* <h2>Hello </h2> */}
 
-        <button className="button" onClick={notify}>
+        <button className="button" onClick={doSomething}>
           Notify
         </button>
 
@@ -42,16 +47,16 @@ function Test(props) {
         `}
       </style>
     </Layout>
-  )
+  );
 }
 
 const mapStateToProps = (state) => ({
   user: state.user,
-})
+});
 
 const mapDispatchToProps = {
   signin,
   signout,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test)
+export default connect(mapStateToProps, mapDispatchToProps)(Test);
