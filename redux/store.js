@@ -4,10 +4,10 @@ import { devToolsEnhancer } from "redux-devtools-extension"
 
 const initialState = {
   user: {
-    id: 1,
-    name: "Ivan Danylenko",
-    email: "danylenko.ivan11@gmail.com",
-    isAuthenticated: true,
+    id: "",
+    name: "",
+    email: "",
+    isAuthenticated: false,
   },
   // Test property
   count: 1,
