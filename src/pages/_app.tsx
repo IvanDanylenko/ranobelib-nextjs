@@ -3,7 +3,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import '@/styles/index.scss';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { wrapper } from '@/redux/store';
+import wrapper from '@/store';
 import { ToastContainer, Slide } from 'react-toastify';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {

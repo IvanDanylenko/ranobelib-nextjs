@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { NextPage } from 'next';
 import TemporaryNavigation from '@/components/TemporaryNavigation';
 import { MainLayout } from '@/components/layout';
 import { connect } from 'react-redux';
@@ -7,21 +8,19 @@ import { signin, signout } from '@/redux/store';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import ToastItem from '@/components/ToastItem';
 import axiosConfig from '@/lib/axiosConfig';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Test: FC = (props) => {
+const Test: NextPage = (props) => {
   // console.log("props", props)
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state);
   const doSomething = () => {
-    axiosConfig
-      .get('/customer')
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    dispatch({ type: 'LOGIN' });
+    console.log(auth);
   };
   return (
-    <MainLayout>
+    // <MainLayout>
+    <>
       <TemporaryNavigation />
       <div className="container container_responsive container_offset">
         <h1>Test page</h1>
@@ -31,7 +30,7 @@ const Test: FC = (props) => {
         <button className="button" onClick={doSomething}>
           Notify
         </button>
-
+        {/* <div>{auth}</div> */}
         {/* container end */}
         {/* WRITE CODE HERE */}
       </div>
@@ -47,7 +46,8 @@ const Test: FC = (props) => {
           }
         `}
       </style>
-    </MainLayout>
+      {/* </MainLayout> */}
+    </>
   );
 };
 

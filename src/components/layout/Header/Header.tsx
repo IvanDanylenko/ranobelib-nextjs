@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
-import { signin, signout } from '@/redux/store';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
 import TippyDropdown from '@/components/TippyDropdown';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
 import Modal from '@/lib/modal';
 
-const Header: FC = (props) => {
-  const { isAuthenticated } = props.user;
+const Header: FC = () => {
+  const { isAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
@@ -121,14 +121,14 @@ const Header: FC = (props) => {
         icon: 'fa-sign-out',
         title: 'Выход',
         addClass: 'text-danger',
-        action: props.signout,
+        action: console.log('HI'),
       },
     ],
   ];
 
   return (
     <header className="header">
-      {!isAuthenticated && (
+      {!isAuth && (
         <>
           <Modal
             isOpen={loginModalIsOpen}
@@ -203,7 +203,7 @@ const Header: FC = (props) => {
 
         <div className="header__item header-right-menu">
           {/* UNREGISTERED USERS TEMPLATE */}
-          {!isAuthenticated && (
+          {!isAuth && (
             <>
               <button
                 className="button header__sign header__sign-in"
@@ -231,7 +231,7 @@ const Header: FC = (props) => {
           )}
 
           {/* USERS WITH REGISTRATION TEMPLATE*/}
-          {isAuthenticated && (
+          {isAuth && (
             <>
               <div className="header-right-menu__item drowdown header-button">
                 <TippyDropdown placement="bottom-end" content={addDropdownContent}>
@@ -271,13 +271,4 @@ const Header: FC = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = {
-  signin,
-  signout,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
