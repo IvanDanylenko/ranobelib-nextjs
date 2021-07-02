@@ -1,6 +1,6 @@
 import { AnyAction, combineReducers } from 'redux';
 import { HYDRATE } from 'next-redux-wrapper';
-import authReducer from '@/store/slices/authSlice';
+import authReducer from 'src/store/slices/authSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,

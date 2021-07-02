@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import TemporaryNavigation from '@/components/TemporaryNavigation';
+import TemporaryNavigation from 'src/TemporaryNavigation';
 
 interface ICustom404 {
   text?: string;

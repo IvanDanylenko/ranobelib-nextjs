@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-import HeaderReader from '@/components/HeaderReader';
-import TemporaryNavigation from '@/components/TemporaryNavigation';
+import TemporaryNavigation from 'src/TemporaryNavigation';
 
 const Reader: FC = () => {
   return (

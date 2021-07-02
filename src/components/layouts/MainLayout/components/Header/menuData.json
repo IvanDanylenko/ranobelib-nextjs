@@ -1,0 +1,105 @@
+{
+  "catalogDropdownContent": [
+    [
+      {
+        "title": "Японской"
+      },
+      {
+        "title": "Корейской"
+      },
+      {
+        "title": "Китайской"
+      },
+      {
+        "title": "Английской"
+      },
+      {
+        "title": "Авторской"
+      },
+      {
+        "title": "Фанфиков"
+      }
+    ],
+    [
+      {
+        "title": "Весь"
+      },
+      {
+        "title": "Случайный тайтл"
+      }
+    ]
+  ],
+  "addDropdownContent": [
+    [
+      {
+        "href": "/novel/create",
+        "icon": "fa-plus",
+        "title": "Добавить мангу"
+      },
+      {
+        "icon": "fa-users",
+        "title": "Добавить команду"
+      },
+      {
+        "icon": "fa-book",
+        "title": "Добавить автора"
+      }
+    ],
+    [
+      {
+        "icon": "fa-list-alt",
+        "title": "Мои добавления",
+        "label": "1"
+      }
+    ]
+  ],
+  "userMenuDropdownContent": [
+    [
+      {
+        "href": "/profile",
+        "icon": "fa-user",
+        "title": "Профиль пользователя"
+      },
+      {
+        "icon": "fa-bookmark",
+        "title": "Мои закладки"
+      },
+      {
+        "icon": "fa-bell",
+        "title": "Уведомления"
+      },
+      {
+        "icon": "fa-comment",
+        "title": "Мои комментарии"
+      },
+      {
+        "icon": "fa-envelope",
+        "title": "Личные сообщения"
+      },
+      {
+        "icon": "fa-users",
+        "title": "Список друзей"
+      },
+      {
+        "icon": "fa-ban",
+        "title": "История банов"
+      },
+      {
+        "icon": "fa-user-times",
+        "title": "Игнор-лист"
+      }
+    ],
+    [
+      {
+        "icon": "fa-cog",
+        "title": "Настройки"
+      },
+      {
+        "icon": "fa-sign-out",
+        "title": "Выход",
+        "addClass": "text-danger",
+        "action": ""
+      }
+    ]
+  ]
+}

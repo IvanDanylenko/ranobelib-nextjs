@@ -1,8 +1,8 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { connect } from 'react-redux';
-import { MainLayout } from '@/components/layout';
-import Custom404 from '@/pages/404';
+import { MainLayout } from 'src/components/layout';
+import Custom404 from 'src/pages/404';
 
 interface IUser {
   isAuthenticated: boolean;

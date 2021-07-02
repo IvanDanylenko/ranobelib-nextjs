@@ -1,17 +1,22 @@
 {
-  "name": "learn-starter",
+  "name": "ranobelib",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.1",
     "@tippyjs/react": "^4.2.5",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
+    "formik": "^2.2.7",
     "next": "^10.0.0",
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
@@ -22,11 +27,17 @@
     "react-toastify": "^7.0.3",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
+    "babel-loader": "^8.2.2",
     "redux-devtools-extension": "^2.13.9",
-    "sass": "^1.32.8",
     "typescript": "^4.2.4"
   }
 }

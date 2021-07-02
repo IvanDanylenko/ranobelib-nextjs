@@ -1,13 +1,11 @@
 import React from 'react';
 import { NextPage } from 'next';
-import TemporaryNavigation from '@/components/TemporaryNavigation';
-import { MainLayout } from '@/components/layout';
+import TemporaryNavigation from 'src/TemporaryNavigation';
+import MainLayout from 'src/components/layout/MainLayout';
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import { signin, signout } from '@/redux/store';
 import { ToastContainer, toast, Slide } from 'react-toastify';
-import ToastItem from '@/components/ToastItem';
-import axiosConfig from '@/lib/axiosConfig';
+import axiosConfig from 'src/lib/axiosConfig';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Test: NextPage = (props) => {
