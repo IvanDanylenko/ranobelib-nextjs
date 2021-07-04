@@ -35,8 +35,8 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
-      label: {
-        textTransform: 'capitalize',
+      root: {
+        textTransform: 'none',
       },
     },
   },

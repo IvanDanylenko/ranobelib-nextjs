@@ -2,16 +2,16 @@ import React, { useMemo, ReactNode } from 'react';
 import NextLink from 'next/link';
 import cn from 'classnames';
 import Button from '@material-ui/core/Button';
-import DropdownList, { DropdownItemType } from 'src/components/common/DropdownList';
+import DropdownList, { DropdownContentType } from 'src/components/common/DropdownList';
 import useStyles from './useStyles';
 
 type optionType = {
   id: number | string;
-  label?: string;
+  label?: string | ReactNode;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   link?: string;
-  dropdownContent?: DropdownItemType[];
+  dropdownContent?: DropdownContentType[];
   action?: () => void;
 };
 
@@ -47,7 +47,11 @@ const useMenu = (options: optionType[]) => {
       }
 
       if (dropdownContent) {
-        return <DropdownList content={dropdownContent}>{Item}</DropdownList>;
+        return (
+          <DropdownList key={id} content={dropdownContent}>
+            {Item}
+          </DropdownList>
+        );
       }
 
       return Item;

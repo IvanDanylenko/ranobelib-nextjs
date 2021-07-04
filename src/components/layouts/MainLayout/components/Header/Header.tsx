@@ -18,13 +18,6 @@ import HeaderMenu from './components/HeaderMenu';
 import HeaderRightMenu from './components/HeaderRightMenu';
 import useStyles from './useStyles';
 
-// Get the data for menus
-import {
-  catalogDropdownContent,
-  addDropdownContent,
-  userMenuDropdownContent,
-} from './menuData.json';
-
 const Header: FC = () => {
   const classes = useStyles();
 

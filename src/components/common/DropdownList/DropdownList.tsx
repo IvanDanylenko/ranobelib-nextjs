@@ -1,10 +1,11 @@
-import React, { FC, ReactNode, useRef, useState, useMemo } from 'react';
+import React, { FC, ReactNode, ReactElement, useState, useMemo } from 'react';
 
 import cn from 'classnames';
 
+import Tippy from '@tippyjs/react';
+
 import NextLink from 'next/link';
-import Popper from '@material-ui/core/Popper';
-import Grow from '@material-ui/core/Grow';
+import { PopperPlacementType } from '@material-ui/core/Popper';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -15,9 +16,11 @@ import Divider from '@material-ui/core/Divider';
 
 import useStyles from './useStyles';
 
-export interface DropdownItemType {
+import 'tippy.js/animations/shift-toward-subtle.css';
+
+export interface DropdownContentType {
   id: number | string;
-  label?: string;
+  label?: string | ReactNode;
   divider?: boolean;
   link?: string;
   icon?: string;
@@ -27,23 +30,19 @@ export interface DropdownItemType {
 }
 
 interface DropdownListProps {
-  content: DropdownItemType[];
+  content: DropdownContentType[];
+  placement?: PopperPlacementType;
+  children: ReactElement;
 }
 
-const DropdownList: FC<DropdownListProps> = ({ content, children }) => {
+const DropdownList: FC<DropdownListProps> = ({ children, content, placement = 'bottom-start' }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const anchorRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
-
-  const handleChooseItem = (action?: () => void) => {
-    action && action();
-    handleClose();
-  };
 
   const renderMenu = useMemo(() => {
     return content.map(({ id, label, link, divider, danger, startIcon, action }) => {
@@ -56,9 +55,10 @@ const DropdownList: FC<DropdownListProps> = ({ content, children }) => {
 
       const Item = (
         <Button
+          key={id}
           className={cn(classes.button, { [classes.danger]: danger })}
           startIcon={startIcon}
-          onClick={() => handleChooseItem(action)}
+          onClick={() => action && action()}
           disableRipple
           fullWidth
         >
@@ -77,36 +77,27 @@ const DropdownList: FC<DropdownListProps> = ({ content, children }) => {
   }, [content]);
 
   return (
-    <Box>
-      <div ref={anchorRef} onClick={handleClick}>
-        {children}
-      </div>
-      <Popper
-        open={open}
-        anchorEl={anchorRef.current}
-        placement="bottom-start"
-        transition
-        disablePortal
-      >
-        {({ TransitionProps, placement }) => {
-          return (
-            <Grow
-              {...TransitionProps}
-              timeout={100}
-              style={{
-                transformOrigin: placement === 'bottom-start' ? 'center top' : 'center bottom',
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList>{renderMenu}</MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          );
-        }}
-      </Popper>
-    </Box>
+    <Tippy
+      visible={open}
+      placement={placement}
+      arrow={false}
+      theme="light"
+      offset={[0, 7]}
+      duration={150}
+      animation="shift-toward-subtle"
+      interactive
+      content={
+        <Paper>
+          <ClickAwayListener mouseEvent={open ? 'onClick' : false} onClickAway={handleClose}>
+            <MenuList className={classes.list} onClick={handleClose}>
+              {renderMenu}
+            </MenuList>
+          </ClickAwayListener>
+        </Paper>
+      }
+    >
+      <Box onClick={handleClick}>{children}</Box>
+    </Tippy>
   );
 };
 

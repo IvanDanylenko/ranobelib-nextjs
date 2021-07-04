@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import NextLink from 'next/link';
 
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 
 import MenuRounded from '@material-ui/icons/MenuRounded';
 import ArrowDropDownRounded from '@material-ui/icons/ArrowDropDownRounded';
@@ -13,28 +11,7 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 
 import useMenu from 'src/hooks/useMenu/useMenu';
 
-// temporary
-const catalogDropdownContent = [
-  {
-    id: 1,
-    label: 'Японской',
-  },
-  {
-    id: 2,
-    divider: true,
-  },
-  {
-    id: 3,
-    label: 'Весь',
-    startIcon: <Search />,
-    danger: true,
-  },
-  {
-    id: 4,
-    label: 'Случайный тайтл',
-    danger: true,
-  },
-];
+import { catalogContent, moreContent } from '../../menuData';
 
 const HeaderMenu: FC = () => {
   const menu = [
@@ -43,7 +20,7 @@ const HeaderMenu: FC = () => {
       label: 'Каталог',
       startIcon: <MenuRounded />,
       endIcon: <ArrowDropDownRounded />,
-      dropdownContent: catalogDropdownContent,
+      dropdownContent: catalogContent,
       action: () => console.log('Click'),
     },
     {
@@ -65,7 +42,7 @@ const HeaderMenu: FC = () => {
     {
       id: 5,
       startIcon: <MoreHoriz />,
-      dropdownContent: catalogDropdownContent,
+      dropdownContent: moreContent,
     },
   ];
 

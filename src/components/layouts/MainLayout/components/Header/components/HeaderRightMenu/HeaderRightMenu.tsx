@@ -1,48 +1,87 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useMemo } from 'react';
+import Image from 'next/image';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Brightness2Outlined from '@material-ui/icons/Brightness2Outlined';
 import Create from '@material-ui/icons/Create';
 import Notifications from '@material-ui/icons/Notifications';
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 
+import DropdownList from 'src/components/common/DropdownList';
+
 import useMenu from 'src/hooks/useMenu';
 
 import useStyles from './useStyles';
 
-const menu = [
-  {
-    id: 1,
-    startIcon: <Brightness2Outlined />,
-  },
-  {
-    id: 2,
-    startIcon: <Create />,
-  },
-  {
-    id: 3,
-    startIcon: <Notifications />,
-  },
-  {
-    id: 4,
-    startIcon: <BookmarkBorder />,
-  },
-];
+import { addContent, userMenuContent } from '../../menuData';
 
 const HeaderRightMenu: FC = () => {
   const classes = useStyles();
 
-  const { renderMenu } = useMenu(menu);
+  const [isAuth, setIsAuth] = useState(true);
+
+  userMenuContent.forEach(
+    (item) => item.label === 'Выход' && (item.action = () => setIsAuth(false)),
+  );
+
+  const notAuthMenu = [
+    {
+      id: 1,
+      startIcon: <Brightness2Outlined />,
+    },
+  ];
+
+  const authMenu = [
+    {
+      id: 1,
+      startIcon: <Create />,
+      dropdownContent: addContent,
+    },
+    {
+      id: 2,
+      startIcon: <Notifications />,
+    },
+    {
+      id: 3,
+      startIcon: <BookmarkBorder />,
+    },
+  ];
+
+  const { renderMenu: renderNotAuthMenuItems } = useMenu(notAuthMenu);
+
+  const { renderMenu: renderAuthMenuItems } = useMenu(authMenu);
+
+  const renderNotAuthMenu = useMemo(() => {
+    return (
+      <>
+        <Button onClick={() => setIsAuth(true)} className={classes.button}>
+          Вход
+        </Button>
+        <Button onClick={() => setIsAuth(true)} variant="outlined" className={classes.button}>
+          Регистрация
+        </Button>
+        {renderNotAuthMenuItems}
+      </>
+    );
+  }, [isAuth]);
+
+  const renderAuthMenu = useMemo(() => {
+    return (
+      <>
+        {renderAuthMenuItems}
+        <DropdownList content={userMenuContent} placement="bottom-end">
+          <Box css={{ cursor: 'pointer' }}>
+            <Image src="/images/user-placeholder.png" alt="User image" width={36} height={36} />
+          </Box>
+        </DropdownList>
+      </>
+    );
+  }, [isAuth]);
 
   return (
     <Grid container alignItems="center">
-      <Button href="/login" className={classes.button}>
-        Вход
-      </Button>
-      <Button href="/register" variant="outlined" className={classes.button}>
-        Регистрация
-      </Button>
-      {renderMenu}
+      {isAuth ? renderAuthMenu : renderNotAuthMenu}
     </Grid>
   );
 };
