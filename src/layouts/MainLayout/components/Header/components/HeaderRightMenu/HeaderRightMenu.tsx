@@ -1,5 +1,4 @@
 import React, { FC, useState, useMemo } from 'react';
-import Image from 'next/image';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,7 @@ import Notifications from '@material-ui/icons/Notifications';
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 
 import DropdownList from 'src/components/common/DropdownList';
+import UserAvatar from 'src/components/common/UserAvatar';
 
 import useMenu from 'src/hooks/useMenu';
 
@@ -71,9 +71,7 @@ const HeaderRightMenu: FC = () => {
       <>
         {renderAuthMenuItems}
         <DropdownList content={userMenuContent} placement="bottom-end">
-          <Box css={{ cursor: 'pointer' }}>
-            <Image src="/images/user-placeholder.png" alt="User image" width={36} height={36} />
-          </Box>
+          <UserAvatar className={classes.userAvatar} size="small" notClickable />
         </DropdownList>
       </>
     );

@@ -8,5 +8,8 @@ export default makeStyles((theme) =>
       borderColor: theme.palette.common.white,
       fontWeight: theme.typography.fontWeightRegular,
     },
+    userAvatar: {
+      cursor: 'pointer',
+    },
   }),
 );
