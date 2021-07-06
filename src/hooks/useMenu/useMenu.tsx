@@ -1,8 +1,11 @@
 import React, { useMemo, ReactNode } from 'react';
-import NextLink from 'next/link';
 import cn from 'classnames';
+
 import Button from '@material-ui/core/Button';
+
 import DropdownList, { DropdownContentType } from 'src/components/common/DropdownList';
+import Link from 'src/components/common/Link';
+
 import useStyles from './useStyles';
 
 type optionType = {
@@ -40,9 +43,9 @@ const useMenu = (options: optionType[]) => {
 
       if (link) {
         return (
-          <NextLink key={id} href={link} passHref>
+          <Link key={id} href={link}>
             {Item}
-          </NextLink>
+          </Link>
         );
       }
 

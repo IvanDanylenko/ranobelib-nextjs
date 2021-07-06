@@ -4,7 +4,6 @@ import cn from 'classnames';
 
 import Tippy from '@tippyjs/react';
 
-import NextLink from 'next/link';
 import { PopperPlacementType } from '@material-ui/core/Popper';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -13,6 +12,8 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+
+import Link from 'src/components/common/Link';
 
 import useStyles from './useStyles';
 
@@ -67,9 +68,9 @@ const DropdownList: FC<DropdownListProps> = ({ children, content, placement = 'b
       );
 
       const LinkItem = link && (
-        <NextLink key={id} href={link} passHref>
+        <Link key={id} href={link} underline="none">
           {Item}
-        </NextLink>
+        </Link>
       );
 
       return <MenuItem key={id}>{LinkItem ? LinkItem : Item}</MenuItem>;

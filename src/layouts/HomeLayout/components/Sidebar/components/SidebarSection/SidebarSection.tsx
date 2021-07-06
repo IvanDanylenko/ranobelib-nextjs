@@ -1,20 +1,66 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import cn from 'classnames';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Collapse from '@material-ui/core/Collapse';
+import ArrowDropUpRounded from '@material-ui/icons/ArrowDropUpRounded';
+import ArrowDropDownRounded from '@material-ui/icons/ArrowDropDownRounded';
 
 import useStyles from './useStyles';
 
 type SidebarSectionProps = {
   header: ReactNode;
-  divideContent?: boolean;
+  withDivider?: boolean;
+  collapsedHeight?: string | number;
+  timeout?: number | 'auto';
+  disableSpacing?: boolean;
 };
 
-const SidebarSection: FC<SidebarSectionProps> = ({ children, header, divideContent }) => {
+const SidebarSection: FC<SidebarSectionProps> = ({
+  children,
+  header,
+  withDivider,
+  collapsedHeight,
+  timeout,
+  disableSpacing,
+}) => {
   const classes = useStyles();
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const ExpandableContent = (
+    <>
+      <Collapse in={isExpanded} collapsedHeight={collapsedHeight} timeout={timeout}>
+        {children}
+      </Collapse>
+      <Grid container justify="center">
+        {isExpanded ? (
+          <Button
+            className={classes.expandButton}
+            endIcon={<ArrowDropUpRounded />}
+            onClick={() => setIsExpanded(false)}
+          >
+            Свернуть
+          </Button>
+        ) : (
+          <Button
+            className={classes.expandButton}
+            endIcon={<ArrowDropDownRounded />}
+            onClick={() => setIsExpanded(true)}
+          >
+            Развернуть
+          </Button>
+        )}
+      </Grid>
+    </>
+  );
+
+  const Content = collapsedHeight ? ExpandableContent : children;
 
   return (
     <Card>
@@ -28,9 +74,13 @@ const SidebarSection: FC<SidebarSectionProps> = ({ children, header, divideConte
         disableTypography
       />
       <CardContent
-        className={cn(classes.cardContent, { [classes.cardContentDivided]: divideContent })}
+        className={cn(
+          classes.cardContent,
+          { [classes.cardContentDivided]: withDivider },
+          { [classes.disableSpacing]: disableSpacing },
+        )}
       >
-        {children}
+        {Content}
       </CardContent>
     </Card>
   );

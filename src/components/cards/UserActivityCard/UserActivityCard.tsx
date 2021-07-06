@@ -1,12 +1,11 @@
 import React from 'react';
-import NextLink from 'next/link';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import UserAvatar from 'src/components/common/UserAvatar';
+import Link from 'src/components/common/Link';
 import useStyles from './useStyles';
 
 const UserActivityCard = () => {
@@ -15,11 +14,9 @@ const UserActivityCard = () => {
   const renderTop = (
     <Grid container justify="space-between">
       <Grid item>
-        <NextLink href="/" passHref>
-          <Link color="textPrimary" className={classes.username}>
-            master
-          </Link>
-        </NextLink>
+        <Link href="/" color="textPrimary" className={classes.username}>
+          master
+        </Link>
       </Grid>
       <Grid item>
         <Typography className={classes.rank}>#1</Typography>

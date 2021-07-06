@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-import NextLink from 'next/link';
-import Link from '@material-ui/core/Link';
+
 import Box from '@material-ui/core/Box';
+
+import Link from 'src/components/common/Link';
 
 type UserAvatarProps = {
   notClickable?: boolean;
@@ -38,11 +39,7 @@ const UserAvatar: FC<UserAvatarProps> = ({ notClickable, className, size = 'medi
 
   if (notClickable) return Item;
 
-  return (
-    <NextLink href="link-to-profile" passHref>
-      <Link>{Item}</Link>
-    </NextLink>
-  );
+  return <Link href="link-to-profile">{Item}</Link>;
 };
 
 export default UserAvatar;

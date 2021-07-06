@@ -19,9 +19,26 @@ export default makeStyles((theme) =>
         borderBottom: `1px solid ${theme.palette.grey[300]}`,
       },
     },
+    disableSpacing: {
+      padding: theme.spacing(0),
+      '&:last-child': {
+        paddingBottom: theme.spacing(0),
+      },
+    },
     headerText: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightMedium,
+    },
+    expandButton: {
+      color: theme.palette.text.secondary,
+      fontSize: theme.typography.pxToRem(14),
+      '&:hover': {
+        color: theme.palette.primary.light,
+        backgroundColor: 'transparent',
+      },
+      '& .MuiButton-endIcon': {
+        marginLeft: theme.spacing(0.5),
+      },
     },
   }),
 );
