@@ -8,14 +8,13 @@ import Footer from './components/Footer';
 import useStyles from './useStyles';
 
 const MainLayout: FC = ({ children }) => {
-  const classes = useStyles();
+  if (!children) return null;
 
+  const classes = useStyles();
   return (
     <>
       <Header />
-      <Container maxWidth="lg">
-        <>{children}</>
-      </Container>
+      <Container maxWidth="lg">{children}</Container>
       <Footer />
     </>
   );

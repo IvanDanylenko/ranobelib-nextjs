@@ -5,10 +5,10 @@ import cn from 'classnames';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Visibility from '@material-ui/icons/Visibility';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import MediaCover from 'src/components/common/MediaCover';
-import Link from 'src/components/common/Link';
+import Link from 'src/components/utils/Link';
 
 import useStyles from './useStyles';
 
@@ -26,7 +26,7 @@ const MediaCard = () => {
             <Typography className={classes.title}>Мастер веры в себя (Новелла)</Typography>
             <Grid container alignItems="center">
               <Typography className={classes.subtitle}>1044218</Typography>
-              <Visibility className={cn(classes.subtitle, classes.icon)} />
+              <VisibilityIcon className={cn(classes.subtitle, classes.icon)} />
             </Grid>
           </Box>
         </Grid>

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import UserAvatar from 'src/components/common/UserAvatar';
-import Link from 'src/components/common/Link';
+import Link from 'src/components/utils/Link';
 import useStyles from './useStyles';
 
 const UserActivityCard = () => {
@@ -14,9 +14,7 @@ const UserActivityCard = () => {
   const renderTop = (
     <Grid container justify="space-between">
       <Grid item>
-        <Link href="/" color="textPrimary" className={classes.username}>
-          master
-        </Link>
+        <Link href="/">master</Link>
       </Grid>
       <Grid item>
         <Typography className={classes.rank}>#1</Typography>

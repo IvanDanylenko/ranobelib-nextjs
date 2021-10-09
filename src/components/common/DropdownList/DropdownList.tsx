@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
-import Link from 'src/components/common/Link';
+import Link from 'src/components/utils/Link';
 
 import useStyles from './useStyles';
 
@@ -78,27 +78,29 @@ const DropdownList: FC<DropdownListProps> = ({ children, content, placement = 'b
   }, [content]);
 
   return (
-    <Tippy
-      visible={open}
-      placement={placement}
-      arrow={false}
-      theme="light"
-      offset={[0, 7]}
-      duration={150}
-      animation="shift-toward-subtle"
-      interactive
-      content={
-        <Paper>
-          <ClickAwayListener mouseEvent={open ? 'onClick' : false} onClickAway={handleClose}>
-            <MenuList className={classes.list} onClick={handleClose}>
-              {renderMenu}
-            </MenuList>
-          </ClickAwayListener>
-        </Paper>
-      }
-    >
-      <Box onClick={handleClick}>{children}</Box>
-    </Tippy>
+    <Box>
+      <Tippy
+        visible={open}
+        placement={placement}
+        arrow={false}
+        theme="light"
+        offset={[0, 7]}
+        duration={150}
+        animation="shift-toward-subtle"
+        interactive
+        content={
+          <Paper>
+            <ClickAwayListener mouseEvent={open ? 'onClick' : false} onClickAway={handleClose}>
+              <MenuList className={classes.list} onClick={handleClose}>
+                {renderMenu}
+              </MenuList>
+            </ClickAwayListener>
+          </Paper>
+        }
+      >
+        <Box onClick={handleClick}>{children}</Box>
+      </Tippy>
+    </Box>
   );
 };
 

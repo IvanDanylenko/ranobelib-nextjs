@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import Box from '@material-ui/core/Box';
 
-import Link from 'src/components/common/Link';
+import Link from 'src/components/utils/Link';
 
 type UserAvatarProps = {
   notClickable?: boolean;

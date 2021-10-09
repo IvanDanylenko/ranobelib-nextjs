@@ -1,30 +1,21 @@
-import React, { useMemo, ReactNode } from 'react';
+import React, { useMemo } from 'react';
 import cn from 'classnames';
 
 import Button from '@material-ui/core/Button';
 
-import DropdownList, { DropdownContentType } from 'src/components/common/DropdownList';
-import Link from 'src/components/common/Link';
+import DropdownList from 'src/components/common/DropdownList';
+import Link from 'src/components/utils/Link';
 
+import { IUseMenuOption } from './types';
 import useStyles from './useStyles';
 
-type optionType = {
-  id: number | string;
-  label?: string | ReactNode;
-  startIcon?: ReactNode;
-  endIcon?: ReactNode;
-  link?: string;
-  dropdownContent?: DropdownContentType[];
-  action?: () => void;
-};
-
-const useMenu = (options: optionType[]) => {
+const useMenu = (options: IUseMenuOption[]) => {
   if (!options) return {};
 
   const classes = useStyles();
 
   const renderMenu = useMemo(() => {
-    return options.map(({ id, label, startIcon, endIcon, link, dropdownContent, action }) => {
+    return options.map(({ id, label, StartIcon, EndIcon, link, dropdownContent, action }) => {
       const Item = (
         <Button
           key={id}
@@ -33,8 +24,8 @@ const useMenu = (options: optionType[]) => {
             startIcon: classes.startIcon,
             iconSizeMedium: cn({ [classes.iconSizeMedium]: label }),
           }}
-          startIcon={startIcon}
-          endIcon={endIcon}
+          startIcon={StartIcon && <StartIcon />}
+          endIcon={EndIcon && <EndIcon />}
           onClick={() => action && action()}
         >
           {label}

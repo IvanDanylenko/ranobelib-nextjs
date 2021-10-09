@@ -2,12 +2,12 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import MainLayout from 'src/layouts/MainLayout';
-import HomeLayout from 'src/layouts/HomeLayout';
+import HomeView from 'src/views/HomeView';
 
 const HomePage: NextPage = () => {
   return (
     <MainLayout>
-      <HomeLayout />
+      <HomeView />
     </MainLayout>
   );
 };

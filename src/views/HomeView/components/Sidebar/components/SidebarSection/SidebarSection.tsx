@@ -43,6 +43,7 @@ const SidebarSection: FC<SidebarSectionProps> = ({
           <Button
             className={classes.expandButton}
             endIcon={<ArrowDropUpRounded />}
+            disableRipple
             onClick={() => setIsExpanded(false)}
           >
             Свернуть
@@ -51,6 +52,7 @@ const SidebarSection: FC<SidebarSectionProps> = ({
           <Button
             className={classes.expandButton}
             endIcon={<ArrowDropDownRounded />}
+            disableRipple
             onClick={() => setIsExpanded(true)}
           >
             Развернуть

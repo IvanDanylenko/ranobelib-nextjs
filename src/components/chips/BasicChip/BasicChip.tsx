@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import Chip, { ChipProps } from '@material-ui/core/Chip';
 
-import Link from 'src/components/common/Link';
+import Link from 'src/components/utils/Link';
 
 import useStyles from './useStyles';
 

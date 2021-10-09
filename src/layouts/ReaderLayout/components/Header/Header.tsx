@@ -8,6 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Box from '@material-ui/core/Box';
 
 import Head from 'src/layouts/components/Head';
+
 import Link from 'src/components/utils/Link';
 import TemporaryNavigation from 'src/TemporaryNavigation';
 import HeaderMenu from './components/HeaderMenu';
