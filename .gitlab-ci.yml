@@ -1,0 +1,27 @@
+image: node:14.18.1
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - .yarn/
+
+before_script:
+  - yarn install --prefer-offline --cache-folder .yarn
+
+stages:
+  - quality
+  - build
+
+quality:
+  stage: quality
+  script:
+    - yarn tsc
+    - yarn lint
+    - yarn jest
+  only:
+    - merge_requests
+
+build:
+  stage: build
+  script: yarn build
+  only:
+    - merge_requests

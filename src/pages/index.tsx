@@ -1,15 +1,12 @@
-import React from 'react';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
+import { Typography } from '@mui/material';
 
-import MainLayout from 'src/layouts/MainLayout';
-import HomeView from 'src/views/HomeView';
-
-const HomePage: NextPage = () => {
+const Home: NextPage = () => {
   return (
-    <MainLayout>
-      <HomeView />
-    </MainLayout>
+    <Typography m={2} variant="h2">
+      Home Page
+    </Typography>
   );
 };
 
-export default HomePage;
+export default Home;

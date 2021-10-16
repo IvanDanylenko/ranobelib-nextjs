@@ -1,35 +1,33 @@
-import React, { useEffect } from 'react';
-import { NextPage } from 'next';
-import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { wrapper } from 'src/store';
+import { AppProps } from 'next/app';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import theme, { createEmotionCache } from '@/theme';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import '@fontsource/inter/variable.css';
 
-import theme from 'src/assets/theme';
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
-const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
-  useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side');
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 
-    if (jssStyles && jssStyles.parentElement) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }, []);
-
+const MyApp = (props: MyAppProps) => {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Next.js Ranobelib</title>
+        <title>Homats shop</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </CacheProvider>
   );
 };
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;
