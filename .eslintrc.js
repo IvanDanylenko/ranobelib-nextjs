@@ -10,5 +10,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
+    // Eslint incorrect rule that gives error on windows
+    '@next/next/no-document-import-in-page': 'off',
   },
 };
